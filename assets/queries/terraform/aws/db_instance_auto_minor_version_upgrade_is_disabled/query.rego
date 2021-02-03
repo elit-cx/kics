@@ -2,7 +2,8 @@ package Cx
 
 CxPolicy[result] {
 	resource := input.document[i].resource.aws_db_instance[name]
-	not resource.auto_minor_version_upgrade
+	object.get(resource,"auto_minor_version_upgrade","undefined") != "undefined"
+    not resource.auto_minor_version_upgrade
 
 	result := {
 		"documentId": input.document[i].id,
@@ -10,5 +11,18 @@ CxPolicy[result] {
 		"issueType": "IncorrectValue",
 		"keyExpectedValue": "'aws_db_instance.auto_minor_version_upgrade'  is 'true'",
 		"keyActualValue": "'aws_db_instance.auto_minor_version_upgrade'  is 'false'",
+	}
+}
+
+CxPolicy[result] {
+	resource := input.document[i].resource.aws_db_instance[name]
+	object.get(resource,"auto_minor_version_upgrade","undefined") == "undefined"
+
+	result := {
+		"documentId": input.document[i].id,
+		"searchKey": sprintf("aws_db_instance[%s]", [name]),
+		"issueType": "MissingAttribute",
+		"keyExpectedValue": "'aws_db_instance.auto_minor_version_upgrade' is set",
+		"keyActualValue": "'aws_db_instance.auto_minor_version_upgrade'  is undefined",
 	}
 }
