@@ -25,5 +25,5 @@ At a high very level, KICS is composed of the following main components: a comma
 ## Execution Flow
 
 The sequence diagram below depicts interaction of the main KICS components:  
-<img src="../img/exec-flow-1.png" align="left">  
-<img src="../img/exec-flow-2.png" align="left">
+<img src="img/exec-flow-1.png" align="left">  
+<img src="img/exec-flow-2.png" align="left">
